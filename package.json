@@ -4,7 +4,8 @@
   "description": "Server for supporting custom slack commands",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "install": "npm install"
   },
   "dependencies": {
     "restify": "^4.0.4"
