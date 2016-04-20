@@ -26,7 +26,8 @@ server.post('/shorten', (req, res) => {
             { method: 'POST', headers: {'Accept':'application/json'}, body: 'apiKey=' + process.env.SHORTSWITCH_TOKEN +' +&longUrl=' + req.body.text })
     	   .then((shortswitchRes) => {
                shortswitchRes.json().then((jsonnn) => {
-                   res.send({ 'response_type': 'in_channel', 'text': jsonnn.results[req.body.longUrl] });
+                   console.log(jsonnn);
+                   res.send({ 'response_type': 'in_channel', 'text': jsonnn.results[req.body.text] });
                })
            });
        }
