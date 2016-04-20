@@ -3,11 +3,12 @@ var restify = require('restify');
 var server = restify.createServer();
 server.post('/shorten', (req, res, next) => {
 
-    if(req.params.token === process.env.SLACK_TOKEN){
-        res.send('yolo');
+    if(req.params.token == process.env.SLACK_TOKEN){
+        console.log(req.params.token);
+        console.log(process.env.SLACK_TOKEN);
     }
     else {
-        res.status(401);
+        res.send(401, {error: 'Incorrect token.'});
     }
     next();
 });
