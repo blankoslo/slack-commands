@@ -20,6 +20,11 @@ function shortswitch(url, alias){
 	    });
 }
 
+//stupid stupid shortswitch api
+function firstAttribute(obj) {
+    for (var a in obj) return obj[a];
+}
+
 server.post('/shorten', (req, res) => {
     if(req.body.token == process.env.SLACK_TOKEN){
         fetch('http://api.shortswitch.com/shorten',
@@ -27,7 +32,7 @@ server.post('/shorten', (req, res) => {
     	   .then((shortswitchRes) => {
                shortswitchRes.json().then((jsonnn) => {
                    console.log(jsonnn);
-                   res.send({ 'response_type': 'in_channel', 'text': jsonnn.results[req.body.text] });
+                   res.send({ 'response_type': 'in_channel', 'text': firstAttribute(jsonnn.results) });
                })
            });
        }
