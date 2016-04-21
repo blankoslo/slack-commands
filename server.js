@@ -27,8 +27,9 @@ function firstAttribute(obj) {
 
 server.post('/shorten', (req, res) => {
     if(req.body.token == process.env.SLACK_TOKEN){
+        var textArray = req.body.text.split(' ');
         fetch('http://api.shortswitch.com/shorten',
-            { method: 'POST', headers: {'Accept':'application/json'}, body: 'apiKey=' + process.env.SHORTSWITCH_TOKEN +' +&longUrl=' + req.body.text })
+            { method: 'POST', headers: {'Accept':'application/json'}, body: 'apiKey=' + process.env.SHORTSWITCH_TOKEN +' +&longUrl=' + textArray[0] +' +&token=' + textArray[1]})
     	   .then((shortswitchRes) => {
                shortswitchRes.json().then((jsonnn) => {
                    var shortBody = firstAttribute(jsonnn.results)
