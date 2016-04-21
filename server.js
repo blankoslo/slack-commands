@@ -31,8 +31,9 @@ server.post('/shorten', (req, res) => {
             { method: 'POST', headers: {'Accept':'application/json'}, body: 'apiKey=' + process.env.SHORTSWITCH_TOKEN +' +&longUrl=' + req.body.text })
     	   .then((shortswitchRes) => {
                shortswitchRes.json().then((jsonnn) => {
-                   console.log(jsonnn);
-                   res.send({ 'response_type': 'in_channel', 'text': firstAttribute(jsonnn.results) });
+                   var shortBody = firstAttribute(jsonnn.results)
+                   res.send({ 'response_type': 'in_channel', 'text': 'Ah yiss du har fått URL!',
+                   'attachments': [{'text' : 'Langlang: ' + shortBody.longUrl}, {'text' : 'Kortkort: ' + shortBody.shortUrl } ] });
                })
            });
        }
